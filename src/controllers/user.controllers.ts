@@ -2,8 +2,8 @@ import { Response, Request } from 'express';
 import User from '../models/user';
 
 export async function getAllUsers(req: Request, res: Response) {
-  const allUsers = await User.find();
-  res.status(200).json(allUsers);
+  const allUsers = await User.find().exec();
+  return res.status(200).json(allUsers);
 }
 
 export async function createUser(req: Request, res: Response) {
@@ -24,7 +24,7 @@ export async function createUser(req: Request, res: Response) {
   }
   const newUser = new User(req.body);
   await newUser.save();
-  res.status(201).json(newUser);
+  return res.status(201).json(newUser);
 }
 
 export async function updateUser(req: Request, res: Response) {
@@ -61,7 +61,7 @@ export async function updateUser(req: Request, res: Response) {
     user.movies = req.body.movies;
     await user.save();
   }
-  res.status(201).json(user);
+  return res.status(201).json(user);
 }
 
 export async function deleteUser(req: Request, res: Response) {
