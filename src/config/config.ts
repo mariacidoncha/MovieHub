@@ -1,5 +1,7 @@
 import dotenv from 'dotenv';
 
+dotenv.config();
+
 type TConfig = {
   [key: string]: EnvironmentConfig;
 };
@@ -12,12 +14,6 @@ type AppConfig = {
   PORT: string | number;
   DB_URL: string;
 };
-
-if (process.env.NODE_ENV === 'production') {
-  dotenv.config({ path: '.env.production' });
-} else {
-  dotenv.config({ path: '.env.development' });
-}
 
 const ENV = process.env.NODE_ENV ?? 'development';
 
